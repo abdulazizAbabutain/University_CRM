@@ -9,7 +9,8 @@ namespace University_CRM.Application.Common.Interface
         Task<T> GetAsync(Expression<Func<T, bool>> func);
         Task AddAsync(T item);
         Task RemoveAsync(T item);
+        void Update(T item);
         Task<bool> SaveAsync(CancellationToken cancellationToken);
-        Task<bool> IsExists(Expression<Func<T, bool>> func, CancellationToken cancellationToken);
+        Task<bool> IsExistsAsync(Expression<Func<T, bool>> func, CancellationToken cancellationToken);
     }
 }

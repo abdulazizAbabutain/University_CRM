@@ -25,7 +25,7 @@ namespace University_CRM.Infrastructure.Services
             {
                 var includes = includeProperty.Trim().Split(',');
                 foreach (string include in includes)
-                    query.Include(include);
+                    query = query.Include(include);
             }
 
             return await query.ToListAsync();
@@ -49,7 +49,7 @@ namespace University_CRM.Infrastructure.Services
         public async Task<T?> GetAsync(Expression<Func<T, bool>> func)
             => await _context.Set<T>().SingleOrDefaultAsync(func);
 
-        public Task<bool> IsExists(Expression<Func<T, bool>> func, CancellationToken cancellationToken)
+        public Task<bool> IsExistsAsync(Expression<Func<T, bool>> func, CancellationToken cancellationToken)
             => _context.Set<T>().AnyAsync(func,cancellationToken);
 
         public Task RemoveAsync(T item)
@@ -59,5 +59,10 @@ namespace University_CRM.Infrastructure.Services
 
         public async Task<bool> SaveAsync(CancellationToken cancellationToken)
             => ( await _context.SaveChangesAsync(cancellationToken) > 0);
+
+        public void Update(T item)
+        {
+            _context.Entry(item).State = EntityState.Modified;
+        }
     }
 }

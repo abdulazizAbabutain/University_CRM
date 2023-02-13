@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,11 @@ namespace University_CRM.Infrastructure.Services
             : base(context)
         {
             
+        }
+
+        public async Task<IEnumerable<Collage>> GetCollagesWithDetals()
+        {
+            return await _context.Collage.Include("Departments").ToListAsync();
         }
     }
 }

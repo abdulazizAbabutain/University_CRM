@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using University_CRM.Application.Common.Models;
+using University_CRM.Application.Features.Collages.Commands;
 using University_CRM.Application.Features.Departments.Commands.AddDepaertment;
 using University_CRM.Domain.Entities;
 

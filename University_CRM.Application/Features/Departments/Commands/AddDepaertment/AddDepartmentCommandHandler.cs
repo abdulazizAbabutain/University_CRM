@@ -27,7 +27,7 @@ namespace University_CRM.Application.Features.Departments.Commands.AddDepaertmen
         }
         public async Task<Unit> Handle(AddDepartmentCommand request, CancellationToken cancellationToken)
         {
-            if (!await collageRepository.IsExists(x => x.CollageId == request.CollageId, cancellationToken))
+            if (!await collageRepository.IsExistsAsync(x => x.CollageId == request.CollageId, cancellationToken))
                 throw new NotFoundException($"collage with id {request.CollageId} is not found");
             var departmentEntity = mapper.Map<Department>(request);
             await departmentRepository.AddAsync(departmentEntity);
