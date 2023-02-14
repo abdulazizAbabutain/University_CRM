@@ -26,7 +26,7 @@ namespace University_CRM.Application.Features.Departments.Queries.GetDepartment
         {
             if (!await departmentRepository.IsExistsAsync(x => x.DepartmentId == request.Id, cancellationToken))
                 throw new NotFoundException($"the {nameof(Department)} with id {request.Id} was not found");
-            var departmentFromRepo = await departmentRepository.GetAsync(x => x.DepartmentId == request.Id);
+            var departmentFromRepo = await departmentRepository.GetAsync(x => x.DepartmentId == request.Id,cancellationToken);
             return mapper.Map<DepartmentDto>(departmentFromRepo);
         }
     }

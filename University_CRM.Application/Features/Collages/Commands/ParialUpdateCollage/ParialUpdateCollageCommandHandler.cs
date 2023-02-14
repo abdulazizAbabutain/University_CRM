@@ -17,7 +17,7 @@ namespace University_CRM.Application.Features.Collages.Commands.ParialUpdateColl
         }
         public async Task<Unit> Handle(ParialUpdateCollageCommand request, CancellationToken cancellationToken)
         {
-            var collage = await collageRepository.GetAsync(x => x.CollageId == request.Id);
+            var collage = await collageRepository.GetAsync(x => x.CollageId == request.Id, cancellationToken);
             if (collage == null)
                 throw new NotFoundException("string string");
 

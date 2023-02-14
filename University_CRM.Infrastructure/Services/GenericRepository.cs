@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Security.Principal;
 using University_CRM.Application.Common.Interface;
+using University_CRM.Domain.Common;
 using University_CRM.Infrastructure.Persistence;
 
 namespace University_CRM.Infrastructure.Services
@@ -16,7 +18,9 @@ namespace University_CRM.Infrastructure.Services
 
         public async Task AddAsync(T item)
             => await _context.Set<T>().AddAsync(item);
-        
+
+        public async Task AddRangeAsync(IEnumerable<T> items)
+             => await _context.Set<T>().AddRangeAsync(items);
 
         public async Task<IEnumerable<T>> GetAllAsync(string includeProperty)
         {
@@ -46,23 +50,21 @@ namespace University_CRM.Infrastructure.Services
             return await query.Where(func).ToListAsync();
         }
 
-        public async Task<T?> GetAsync(Expression<Func<T, bool>> func)
-            => await _context.Set<T>().SingleOrDefaultAsync(func);
+        public async Task<T?> GetAsync(Expression<Func<T, bool>> func, CancellationToken cancellationToken)
+            => await _context.Set<T>().FirstOrDefaultAsync(func,cancellationToken);
 
         public Task<bool> IsExistsAsync(Expression<Func<T, bool>> func, CancellationToken cancellationToken)
             => _context.Set<T>().AnyAsync(func,cancellationToken);
 
-        public Task RemoveAsync(T item)
-        {
-            throw new NotImplementedException();
-        }
+        public void Remove(T item)
+            => _context.Set<T>().Remove(item);
 
         public async Task<bool> SaveAsync(CancellationToken cancellationToken)
-            => ( await _context.SaveChangesAsync(cancellationToken) > 0);
+            => await _context.SaveChangesAsync(cancellationToken) > 0;
+
 
         public void Update(T item)
-        {
-            _context.Entry(item).State = EntityState.Modified;
-        }
+            => _context.Set<T>().Update(item);
+        
     }
 }

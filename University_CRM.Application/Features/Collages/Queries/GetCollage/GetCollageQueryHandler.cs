@@ -19,7 +19,7 @@ namespace University_CRM.Application.Features.Collages.Queries.GetCollage
         }
         public async Task<CollageDto> Handle(GetCollageQuery request, CancellationToken cancellationToken)
         {
-            var collage = await collageRepository.GetAsync(x => x.CollageId == request.Id);
+            var collage = await collageRepository.GetAsync(x => x.CollageId == request.Id, cancellationToken);
             if (collage == null)
                 throw new NotFoundException($"Collage with id {request.Id} was not found");
             var result = mapper.Map<CollageDto>(collage);

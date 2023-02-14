@@ -1,6 +1,8 @@
-﻿namespace University_CRM.Domain.Entities
+﻿using University_CRM.Domain.Common;
+
+namespace University_CRM.Domain.Entities
 {
-    public class Department
+    public class Department : AuditEntity
     {
         public int DepartmentId { get; set; }
         public string NameArabic { get; set; } = string.Empty;

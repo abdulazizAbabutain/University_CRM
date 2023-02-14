@@ -14,6 +14,12 @@ namespace University_CRM.API.Controllers
             await Mediator.Send(command);
             return NoContent();
         }
+        [HttpPost("Collocation")]
+        public async Task<IActionResult> AddCollageCollocation(AddCollageCollocationCommand command)
+        {
+            await Mediator.Send(command);
+            return NoContent();
+        }
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllCollageQuery query)
             => Ok(await Mediator.Send(query));
@@ -41,6 +47,14 @@ namespace University_CRM.API.Controllers
                 return BadRequest();
             command.Id = id.Value;
             await Mediator.Send(command);
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCollage(int? id)
+        {
+            if (id is null)
+                return BadRequest();
+            await Mediator.Send(new DeleteCollageCommand { Id = id.Value});
             return NoContent();
         }
     }

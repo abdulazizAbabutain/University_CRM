@@ -6,9 +6,10 @@ namespace University_CRM.Application.Common.Interface
     {
         Task<IEnumerable<T>> GetAllAsync(string includeProperty = null);
         Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> func, string includeProperty = null);
-        Task<T> GetAsync(Expression<Func<T, bool>> func);
+        Task<T> GetAsync(Expression<Func<T, bool>> func, CancellationToken cancellationToken);
         Task AddAsync(T item);
-        Task RemoveAsync(T item);
+        Task AddRangeAsync(IEnumerable<T> items);
+        void Remove(T item);
         void Update(T item);
         Task<bool> SaveAsync(CancellationToken cancellationToken);
         Task<bool> IsExistsAsync(Expression<Func<T, bool>> func, CancellationToken cancellationToken);

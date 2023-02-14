@@ -12,6 +12,9 @@ namespace University_CRM.Infrastructure.Configurations
             builder.Property(p => p.NameEnglish).HasMaxLength(100);
             builder.Property(p => p.DescriptionArabic).HasMaxLength(1000);
             builder.Property(p => p.DescriptionEnglish).HasMaxLength(1000);
+            builder.Property(p => p.CreatedBy).HasMaxLength(100);
+            builder.Property(p => p.ModifiedBy).HasMaxLength(100);
+            builder.Property(p => p.DeletedBy).HasMaxLength(100);
 
             builder.HasKey(key => key.CollageId);
 

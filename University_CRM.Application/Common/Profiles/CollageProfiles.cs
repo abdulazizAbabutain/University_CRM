@@ -14,6 +14,7 @@ namespace University_CRM.Application.Common.Profiles
             CreateMap<AddCollageCommand, Collage>();
             CreateMap<FullUpdateCollageCommand, Collage>()
              .ForMember(dest => dest.CollageId, map => map.MapFrom(source => source.id));
+            
         }
     }
 }
