@@ -10,6 +10,7 @@ namespace University_CRM.Application.Common.Interface
         Task AddAsync(T item);
         Task AddRangeAsync(IEnumerable<T> items);
         void Remove(T item);
+        void RemoveRange(IEnumerable<T> items);
         void Update(T item);
         Task<bool> SaveAsync(CancellationToken cancellationToken);
         Task<bool> IsExistsAsync(Expression<Func<T, bool>> func, CancellationToken cancellationToken);

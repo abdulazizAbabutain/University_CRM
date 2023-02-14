@@ -57,5 +57,11 @@ namespace University_CRM.API.Controllers
             await Mediator.Send(new DeleteCollageCommand { Id = id.Value});
             return NoContent();
         }
+        [HttpDelete("Collocation")]
+        public async Task<IActionResult> DeleteCollage([FromQuery] DeleteCollageCollocationCommand command)
+        {
+            await Mediator.Send(command);
+            return NoContent();
+        }
     }
 }

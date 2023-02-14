@@ -59,6 +59,9 @@ namespace University_CRM.Infrastructure.Services
         public void Remove(T item)
             => _context.Set<T>().Remove(item);
 
+        public void RemoveRange(IEnumerable<T> items)
+            => _context.Set<T>().RemoveRange(items);
+        
         public async Task<bool> SaveAsync(CancellationToken cancellationToken)
             => await _context.SaveChangesAsync(cancellationToken) > 0;
 
