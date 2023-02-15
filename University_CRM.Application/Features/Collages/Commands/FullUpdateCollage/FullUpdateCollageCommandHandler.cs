@@ -24,10 +24,10 @@ public class FullUpdateCollageCommandHandler : IRequestHandler<FullUpdateCollage
             throw new NotFoundException($"collage with id {request.id} was not found");
 
 
-        collgaeFromRepo.UpdateNames(request.NameArabic,request.NameEnglish);
-        collgaeFromRepo.UpdateDescriptions(request.DescriptionArabic, request.DescriptionEnglish);
+        //collgaeFromRepo.UpdateNames(request.NameArabic,request.NameEnglish);
+        //collgaeFromRepo.UpdateDescriptions(request.DescriptionArabic, request.DescriptionEnglish);
 
-        //var collage = mapper.Map<Collage>(request);
+        mapper.Map(request,collgaeFromRepo);
 
         await collageRepository.SaveAsync(cancellationToken);
         
