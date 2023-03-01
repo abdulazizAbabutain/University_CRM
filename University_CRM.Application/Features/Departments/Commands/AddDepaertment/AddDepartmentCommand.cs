@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace University_CRM.Application.Features.Departments.Commands.AddDepaertment
+namespace University_CRM.Application.Features.Departments.Commands
 {
     public class AddDepartmentCommand : IRequest
     {

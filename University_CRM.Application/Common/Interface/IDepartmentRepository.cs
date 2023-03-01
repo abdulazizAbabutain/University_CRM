@@ -2,7 +2,7 @@
 
 namespace University_CRM.Application.Common.Interface
 {
-    public interface IDepartmentRepository : IGenericRepository<Department>
+    public interface IDepartmentRepository : IGenericRepository<Department> 
     {
     }
 }

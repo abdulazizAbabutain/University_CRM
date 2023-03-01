@@ -19,13 +19,9 @@ public class FullUpdateCollageCommandHandler : IRequestHandler<FullUpdateCollage
 
     public async Task<Unit> Handle(FullUpdateCollageCommand request, CancellationToken cancellationToken)
     {
-        var collgaeFromRepo = await collageRepository.GetAsync(c => c.CollageId == request.id, cancellationToken);
+        var collgaeFromRepo = await collageRepository.GetAsync(c => c.CollageId == request.id && !c.IsDeleted, cancellationToken);
         if (collgaeFromRepo is null)
             throw new NotFoundException($"collage with id {request.id} was not found");
-
-
-        //collgaeFromRepo.UpdateNames(request.NameArabic,request.NameEnglish);
-        //collgaeFromRepo.UpdateDescriptions(request.DescriptionArabic, request.DescriptionEnglish);
 
         mapper.Map(request,collgaeFromRepo);
 

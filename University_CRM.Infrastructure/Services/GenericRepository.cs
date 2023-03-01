@@ -7,7 +7,7 @@ using University_CRM.Infrastructure.Persistence;
 
 namespace University_CRM.Infrastructure.Services
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly ApplicationContext _context;
 

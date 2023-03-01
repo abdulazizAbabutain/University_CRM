@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using University_CRM.Application.Features.Departments.Commands.AddDepaertment;
+using University_CRM.Application.Features.Departments.Commands;
 using University_CRM.Application.Features.Departments.Queries.GetAllDepartments;
 using University_CRM.Application.Features.Departments.Queries.GetDepartment;
 
@@ -13,15 +13,24 @@ namespace University_CRM.API.Controllers
             await Mediator.Send(command);
             return Ok(); 
         }
+        [HttpPost("Collocation")]
+        public async Task<IActionResult> AddDepartment([FromBody] AddDepaertmentCollocationCommand command)
+        {
+            await Mediator.Send(command);
+            return Ok();
+        }
+        [HttpPut]
+        public async Task<IActionResult> FullUpdateDepartment([FromBody] FullUpdateDepartmentCommand command)
+        {
+            await Mediator.Send(command);
+            return Ok();
+        }
+        
 
         [HttpGet]
         public async Task<IActionResult> GetAllDepartment([FromQuery] GetAllDepartmentsQuery query)
             =>  Ok(await Mediator.Send(query));
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAllDepartment([FromRoute]int? id)
         {

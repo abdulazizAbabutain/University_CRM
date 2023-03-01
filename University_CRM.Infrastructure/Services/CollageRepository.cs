@@ -18,10 +18,5 @@ namespace University_CRM.Infrastructure.Services
         {
             
         }
-
-        public async Task<IEnumerable<Collage>> GetCollagesWithDetals()
-        {
-            return await _context.Collage.Include("Departments").ToListAsync();
-        }
     }
 }

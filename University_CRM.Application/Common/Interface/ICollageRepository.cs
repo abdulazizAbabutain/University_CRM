@@ -2,7 +2,7 @@
 
 namespace University_CRM.Application.Common.Interface
 {
-    public interface ICollageRepository : IGenericRepository<Collage>
+    public interface ICollageRepository : IGenericRepository<Collage> 
     {
     }
 }

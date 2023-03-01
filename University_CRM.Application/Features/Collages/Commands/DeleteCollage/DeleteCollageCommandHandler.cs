@@ -14,7 +14,7 @@ namespace University_CRM.Application.Features.Collages.Commands
         }
         public async Task<Unit> Handle(DeleteCollageCommand request, CancellationToken cancellationToken)
         {
-            var collage = await collageRepository.GetAsync(c => c.CollageId == request.Id, cancellationToken);
+            var collage = await collageRepository.GetAsync(c => c.CollageId == request.Id && !c.IsDeleted, cancellationToken);
             if (collage == null) 
                 throw new NotFoundException("not found delete");
             collageRepository.Remove(collage);

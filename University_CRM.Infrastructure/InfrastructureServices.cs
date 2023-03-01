@@ -17,6 +17,7 @@ namespace University_CRM.Infrastructure
             });
             services.AddScoped<ICollageRepository, CollageRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
 
             return services;
         }

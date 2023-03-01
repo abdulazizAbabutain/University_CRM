@@ -31,12 +31,15 @@ namespace University_CRM.API.Controllers
             var collage = await Mediator.Send(new GetCollageQuery() { Id = id.Value });
             return Ok(collage);
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> FullUpdateCollage([FromRoute] int? id, [FromBody] FullUpdateCollageCommand command)
+        [HttpPut()]
+        public async Task<IActionResult> FullUpdateCollage([FromBody] FullUpdateCollageCommand command)
         {
-            if (id is null)
-                return BadRequest();
-            command.id = id.Value;
+            await Mediator.Send(command);
+            return NoContent();
+        }
+        [HttpPut("Collocation")]
+        public async Task<IActionResult> FullUpdateCollage([FromBody] FullUpdateCollageCollocationCommand command)
+        {
             await Mediator.Send(command);
             return NoContent();
         }

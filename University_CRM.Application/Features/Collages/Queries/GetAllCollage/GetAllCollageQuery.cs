@@ -26,7 +26,7 @@ public class GetAllCollageQueryHandler : IRequestHandler<GetAllCollageQuery, Lis
         if (request.IncloudDepartment)
             incloud = nameof(Collage.Departments);
 
-        var collageFromRepo = await collageRepository.GetAllAsync(incloud);
+        var collageFromRepo = await collageRepository.GetAllAsync(x => !x.IsDeleted,incloud);
         
         return mapper.Map<List<CollageDto>>(collageFromRepo);
     }

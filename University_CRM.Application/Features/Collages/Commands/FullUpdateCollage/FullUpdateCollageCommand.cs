@@ -10,7 +10,6 @@ namespace University_CRM.Application.Features.Collages.Commands
 {
     public class FullUpdateCollageCommand : IRequest
     {
-        [JsonIgnore]
         public int id { get; set; }
         public string NameArabic { get; set; } = string.Empty;
         public string NameEnglish { get; set; } = string.Empty;

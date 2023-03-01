@@ -1,39 +1,30 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using University_CRM.Application.Common.Exceptions;
 using University_CRM.Application.Common.Interface;
 using University_CRM.Domain.Entities;
 
-namespace University_CRM.Application.Features.Departments.Commands.AddDepaertment
+namespace University_CRM.Application.Features.Departments.Commands;
+
+public class AddDepartmentCommandHandler : IRequestHandler<AddDepartmentCommand>
 {
-    public class AddDepartmentCommandHandler : IRequestHandler<AddDepartmentCommand>
+    private readonly IRepositoryManager _repositoryManager;
+    private readonly IMapper mapper;
+
+    public AddDepartmentCommandHandler(IRepositoryManager repositoryManager,IMapper mapper)
     {
-        private readonly IDepartmentRepository departmentRepository;
-        private readonly ICollageRepository collageRepository;
-        private readonly IMapper mapper;
+        _repositoryManager = repositoryManager;
+        this.mapper = mapper;
+    }
+    public async Task<Unit> Handle(AddDepartmentCommand request, CancellationToken cancellationToken)
+    {
+        if (!await _repositoryManager.CollageRepository.IsExistsAsync(x => x.CollageId == request.CollageId && !x.IsDeleted, cancellationToken))
+            throw new NotFoundException($"collage with id {request.CollageId} is not found");
 
-        public AddDepartmentCommandHandler(IDepartmentRepository departmentRepository,
-            ICollageRepository collageRepository,
-            IMapper mapper)
-        {
-            this.departmentRepository = departmentRepository;
-            this.collageRepository = collageRepository;
-            this.mapper = mapper;
-        }
-        public async Task<Unit> Handle(AddDepartmentCommand request, CancellationToken cancellationToken)
-        {
-            if (!await collageRepository.IsExistsAsync(x => x.CollageId == request.CollageId, cancellationToken))
-                throw new NotFoundException($"collage with id {request.CollageId} is not found");
-            var departmentEntity = mapper.Map<Department>(request);
-            await departmentRepository.AddAsync(departmentEntity);
-            await departmentRepository.SaveAsync(cancellationToken);
+        var departmentEntity = mapper.Map<Department>(request);
+        await _repositoryManager.DepartmentRepository.AddAsync(departmentEntity);
+        await _repositoryManager.DepartmentRepository.SaveAsync(cancellationToken);
 
-            return Unit.Value;
-        }
+        return Unit.Value;
     }
 }

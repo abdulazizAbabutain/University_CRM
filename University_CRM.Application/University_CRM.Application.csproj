@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Features\Collages\Commands\FullUpdateCollageCollocation\FullUpdateCollageCollocationCommandHandler.cs~RFd184d06.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.5.1" />
     <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="7.0.2" />
@@ -15,6 +20,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\University_CRM.Domain\University_CRM.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Departments\Commands\FullUpdateDepartmentCollocation\" />
   </ItemGroup>
 
 </Project>
