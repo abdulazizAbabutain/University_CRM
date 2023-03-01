@@ -11,5 +11,6 @@ namespace University_CRM.Domain.Entities
         public string? DescriptionEnglish { get; set; }
         public int CollageId { get; set; }
         public Collage Collage { get; set; }
+        public ICollection<Program> Programs { get; set; }
     }
 }

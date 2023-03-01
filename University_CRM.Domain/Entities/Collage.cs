@@ -24,6 +24,6 @@ namespace University_CRM.Domain.Entities
         public string NameEnglish { get; set; } = string.Empty;
         public string? DescriptionArabic { get; set; }
         public string? DescriptionEnglish { get; set; }
-        public List<Department> Departments { get; set; }
+        public ICollection<Department> Departments { get; set; }
     }
 }
